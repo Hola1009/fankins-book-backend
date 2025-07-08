@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.fankins-book</groupId>
+        <groupId>com.fankinsbook</groupId>
         <artifactId>fankins-book</artifactId>
         <version>${revision}</version>
     </parent>
@@ -15,6 +15,12 @@
     <description>fankins-book-auth</description>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.fankinsbook.framework.common</groupId>
+            <artifactId>fankins-book-framework-common</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -24,6 +30,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fankinsbook.framework.biz.operationlog</groupId>
+            <artifactId>fankins-book-framework-spring-boot-statrer-biz-operationlog</artifactId>
         </dependency>
     </dependencies>
 
