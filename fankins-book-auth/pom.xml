@@ -35,6 +35,17 @@
             <groupId>com.fankinsbook.framework.biz.operationlog</groupId>
             <artifactId>fankins-book-framework-spring-boot-statrer-biz-operationlog</artifactId>
         </dependency>
+        <!-- Mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
