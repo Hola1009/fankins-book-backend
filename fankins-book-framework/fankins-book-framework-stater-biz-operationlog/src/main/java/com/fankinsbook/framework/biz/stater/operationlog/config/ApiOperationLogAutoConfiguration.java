@@ -1,6 +1,6 @@
-package com.fankinsbook.framework.biz.operationlog.config;
+package com.fankinsbook.framework.biz.stater.operationlog.config;
 
-import com.fankinsbook.framework.biz.operationlog.aspect.ApiOperationLogAspect;
+import com.fankinsbook.framework.biz.stater.operationlog.aspect.ApiOperationLogAspect;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 

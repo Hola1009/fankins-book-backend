@@ -13,7 +13,7 @@
     <name>fankins-book-framework</name>
     <modules>
         <module>fankins-book-framework-common</module>
-        <module>fankins-book-framework-spring-boot-statrer-biz-operationlog</module>
+        <module>fankins-book-framework-stater-biz-operationlog</module>
     </modules>
 
 

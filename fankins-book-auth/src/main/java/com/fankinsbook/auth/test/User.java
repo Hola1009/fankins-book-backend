@@ -1,4 +1,4 @@
-package com.fankinsbook.auth.domain.dataobject;
+package com.fankinsbook.auth.test;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDO {
-    private Long id;
+public class User {
+    /**
+     * 昵称
+     */
+    private String nickName;
 
-    private String username;
-
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
 }

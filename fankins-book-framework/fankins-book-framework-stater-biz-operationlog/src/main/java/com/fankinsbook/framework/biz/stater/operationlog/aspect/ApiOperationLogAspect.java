@@ -1,4 +1,4 @@
-package com.fankinsbook.framework.biz.operationlog.aspect;
+package com.fankinsbook.framework.biz.stater.operationlog.aspect;
 
 import com.fankinsbook.framework.common.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class ApiOperationLogAspect {
 
     /** 以自定义 @ApiOperationLog 注解为切点，凡是添加 @ApiOperationLog 的方法，都会执行环绕中的代码 */
-    @Pointcut("@annotation(com.fankinsbook.framework.biz.operationlog.aspect.ApiOperationLog)")
+    @Pointcut("@annotation(com.fankinsbook.framework.biz.stater.operationlog.aspect.ApiOperationLog)")
     public void apiOperationLog() {}
 
     /**

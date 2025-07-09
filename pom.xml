@@ -15,6 +15,7 @@
   <!-- 子模块管理 -->
   <modules>
     <module>fankins-book-framework</module>
+    <module>fankins-book-framework/fankins-book-framework-stater-jackson</module>
   </modules>
 
   <properties>
@@ -38,12 +39,20 @@
     <jackson.version>2.16.1</jackson.version>
     <mysql-connector-java.version>8.0.29</mysql-connector-java.version>
     <druid.version>1.2.21</druid.version>
+    <mybatis-generator-maven-plugin.version>1.3.5</mybatis-generator-maven-plugin.version>
   </properties>
 
   <!-- 统一依赖管理 -->
   <dependencyManagement>
     <dependencies>
 
+
+      <!--自定义 Jackson 配置-->
+      <dependency>
+        <groupId>com.fankins.book.framework.stater.jackson</groupId>
+        <artifactId>fankins-book-framework-stater-jackson</artifactId>
+        <version>${revision}</version>
+      </dependency>
 
      <!-- 公共模块 -->
       <dependency>
@@ -54,9 +63,9 @@
 
       <!-- 业务接口日志组件 -->
       <dependency>
-        <groupId>com.fankinsbook.framework.biz.operationlog</groupId>
-        <artifactId>fankins-book-framework-spring-boot-statrer-biz-operationlog</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>com.fankinsbook.framework.stater.biz.operationlog</groupId>
+        <artifactId>fankins-book-framework-stater-biz-operationlog</artifactId>
+        <version>${revision}</version>
       </dependency>
 
       <!-- Jackson -->
@@ -161,6 +170,26 @@
               </path>
             </annotationProcessorPaths>
           </configuration>
+        </plugin>
+        <!-- 代码生成器 -->
+        <plugin>
+          <groupId>org.mybatis.generator</groupId>
+          <artifactId>mybatis-generator-maven-plugin</artifactId>
+          <version>${mybatis-generator-maven-plugin.version}</version>
+          <configuration>
+            <!-- 允许移动生成的文件 -->
+            <verbose>true</verbose>
+            <!-- 允许覆盖生成的文件 -->
+            <overwrite>true</overwrite>
+          </configuration>
+          <!-- 此插件需要连接数据库，所以需要依赖 MySQL 驱动 -->
+          <dependencies>
+            <dependency>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <version>${mysql-connector-java.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>

@@ -1,4 +1,4 @@
-package com.fankinsbook.framework.biz.operationlog.aspect;
+package com.fankinsbook.framework.biz.stater.operationlog.aspect;
 
 import java.lang.annotation.*;
 

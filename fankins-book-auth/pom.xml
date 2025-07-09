@@ -31,9 +31,15 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- 业务接口日志组件 -->
         <dependency>
-            <groupId>com.fankinsbook.framework.biz.operationlog</groupId>
-            <artifactId>fankins-book-framework-spring-boot-statrer-biz-operationlog</artifactId>
+            <groupId>com.fankinsbook.framework.stater.biz.operationlog</groupId>
+            <artifactId>fankins-book-framework-stater-biz-operationlog</artifactId>
+        </dependency>
+        <!--自定义 Jackson 配置-->
+        <dependency>
+            <groupId>com.fankins.book.framework.stater.jackson</groupId>
+            <artifactId>fankins-book-framework-stater-jackson</artifactId>
         </dependency>
         <!-- Mybatis -->
         <dependency>
@@ -58,6 +64,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
