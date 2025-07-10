@@ -1,5 +1,16 @@
 package com.fankinsbook.auth.controller;
 
+import com.fankinsbook.auth.model.vo.SendVerificationCodeReqVO;
+import com.fankinsbook.auth.service.VerificationCodeService;
+import com.fankinsbook.framework.biz.stater.operationlog.aspect.ApiOperationLog;
+import com.fankinsbook.framework.common.response.Response;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @Slf4j
 public class VerificationCodeController {

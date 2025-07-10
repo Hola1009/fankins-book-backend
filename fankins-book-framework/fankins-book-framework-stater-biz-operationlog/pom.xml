@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.fankinsbook</groupId>
         <artifactId>fankins-book-framework</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <groupId>com.fankinsbook.framework.stater.biz.operationlog</groupId>

@@ -8,7 +8,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <!-- 定义日志文件名称 -->
-    <property name="APP_NAME" value="fan-picture-backend" />
+    <property name="APP_NAME" value="fankins-book-auth" />
     <!-- 定义日志文件的路径 -->
     <property name="LOG_PATH" value="E:/CODE/java_workspace/fankins-book/${APP_NAME}/logs" />
     <!--<property name="LOG_PATH" value="/home/ubuntu/web/fan-picture/${APP_NAME}/logs" />-->

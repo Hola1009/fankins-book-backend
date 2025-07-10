@@ -1,5 +1,18 @@
 package com.fankinsbook.auth.exception;
 
+import com.fankinsbook.auth.enums.ResponseCodeEnum;
+import com.fankinsbook.framework.common.exception.BizException;
+import com.fankinsbook.framework.common.response.Response;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Optional;
+
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -31,9 +44,9 @@ public class GlobalExceptionHandler {
         StringBuilder sb = new StringBuilder();
 
         // 获取校验不通过的字段，并组合错误信息，格式为： email 邮箱格式不正确, 当前值: '123124qq.com';
-        Optional.ofNullable(bindingResult.getFieldErrors()).ifPresent(errors -> {
+        Optional.of(bindingResult.getFieldErrors()).ifPresent(errors -> {
             errors.forEach(error ->
-                    sb.append(error.getField())
+                    sb.append(error.getField())// 获取错误参数
                             .append(" ")
                             .append(error.getDefaultMessage())
                             .append(", 当前值: '")
