@@ -1,6 +1,6 @@
 package com.fankinsbook.auth.exception;
 
-import com.fankinsbook.auth.enums.ResponseCodeEnum;
+import com.fankinsbook.auth.constant.enums.ResponseCodeEnum;
 import com.fankinsbook.framework.common.exception.BizException;
 import com.fankinsbook.framework.common.response.Response;
 import jakarta.servlet.http.HttpServletRequest;
@@ -75,5 +75,19 @@ public class GlobalExceptionHandler {
     public Response<Object> handleOtherException(HttpServletRequest request, Exception e) {
         log.error("{} request error, ", request.getRequestURI(), e);
         return Response.fail(ResponseCodeEnum.SYSTEM_ERROR);
+    }
+
+    @ExceptionHandler({ IllegalArgumentException.class })
+    @ResponseBody
+    public Response<Object> handleIllegalArgumentException(HttpServletRequest request, IllegalArgumentException e) {
+        // 参数错误异常码
+        String errorCode = ResponseCodeEnum.PARAM_NOT_VALID.getErrorCode();
+
+        // 错误信息
+        String errorMessage = e.getMessage();
+
+        log.warn("{} request error, errorCode: {}, errorMessage: {}", request.getRequestURI(), errorCode, errorMessage);
+
+        return Response.fail(errorCode, errorMessage);
     }
 }

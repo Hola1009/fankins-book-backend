@@ -1,6 +1,6 @@
 package com.fankinsbook.auth.service;
 
-import com.fankinsbook.auth.model.vo.SendVerificationCodeReqVO;
+import com.fankinsbook.auth.model.vo.verificationCode.SendVerificationCodeReqVO;
 import com.fankinsbook.framework.common.response.Response;
 
 public interface VerificationCodeService {

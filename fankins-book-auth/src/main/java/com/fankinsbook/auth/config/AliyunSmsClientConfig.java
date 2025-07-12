@@ -27,9 +27,6 @@ public class AliyunSmsClientConfig {
                     .accessKeySecret(accessKeySecret)
                     .build());
 
-            log.warn("accessId:" + accessKeyId);
-            log.warn("accessKey:" + accessKeySecret);
-
             return AsyncClient.builder()
                     .region("cn-qingdao")
                     .credentialsProvider(provider)

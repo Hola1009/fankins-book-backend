@@ -2,8 +2,8 @@ package com.fankinsbook.auth.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import com.fankinsbook.auth.constant.RedisKeyConstants;
-import com.fankinsbook.auth.enums.ResponseCodeEnum;
-import com.fankinsbook.auth.model.vo.SendVerificationCodeReqVO;
+import com.fankinsbook.auth.constant.enums.ResponseCodeEnum;
+import com.fankinsbook.auth.model.vo.verificationCode.SendVerificationCodeReqVO;
 import com.fankinsbook.auth.service.VerificationCodeService;
 import com.fankinsbook.auth.sms.AliyunSmsHelper;
 import com.fankinsbook.framework.common.exception.BizException;
@@ -54,12 +54,14 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
         log.info("==> 手机号: {}, 已生成验证码：【{}】", phone, verificationCode);
 
         // 调用第三方短信发送服务
-        threadPoolTaskExecutor.submit(() -> {
-            String signName = "阿里云短信测试";
-            String templateCode = "SMS_154950909";
-            String templateParam = String.format("{\"code\":\"%s\"}", verificationCode);
-            aliyunSmsHelper.sendMessage(signName, templateCode, phone, templateParam);
-        });
+        // todo 阿里现在短信功能不在支持个人资质自用
+//        threadPoolTaskExecutor.submit(() -> {
+//            String signName = "阿里云短信测试";
+//            String templateCode = "SMS_154950909";
+//            String templateParam = String.format("{\"code\":\"%s\"}", verificationCode);
+//            aliyunSmsHelper.sendMessage(signName, templateCode, phone, templateParam);
+//        });
+
 
         // 存储验证码到 redis, 并设置过期时间为 3 分钟
         redisTemplate.opsForValue().set(key, verificationCode, 3, TimeUnit.MINUTES);

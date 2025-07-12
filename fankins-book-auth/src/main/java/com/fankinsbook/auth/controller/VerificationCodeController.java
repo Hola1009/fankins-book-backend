@@ -1,6 +1,6 @@
 package com.fankinsbook.auth.controller;
 
-import com.fankinsbook.auth.model.vo.SendVerificationCodeReqVO;
+import com.fankinsbook.auth.model.vo.verificationCode.SendVerificationCodeReqVO;
 import com.fankinsbook.auth.service.VerificationCodeService;
 import com.fankinsbook.framework.biz.stater.operationlog.aspect.ApiOperationLog;
 import com.fankinsbook.framework.common.response.Response;
