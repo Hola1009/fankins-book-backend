@@ -2,31 +2,36 @@ package com.fankinsbook.auth.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import com.fankinsbook.auth.constant.RedisKeyConstants;
-import com.fankinsbook.auth.constant.RoleConstants;
-import com.fankinsbook.auth.constant.enums.LoginTypeEnum;
-import com.fankinsbook.auth.constant.enums.ResponseCodeEnum;
+import com.fankins.book.framework.stater.biz.context.holder.LoginUserContextHolder;
+import com.fankinsbook.auth.domain.dataobject.RoleDO;
 import com.fankinsbook.auth.domain.dataobject.UserDO;
 import com.fankinsbook.auth.domain.dataobject.UserRoleRelDO;
+import com.fankinsbook.auth.domain.mapper.RoleDOMapper;
 import com.fankinsbook.auth.domain.mapper.UserDOMapper;
 import com.fankinsbook.auth.domain.mapper.UserRoleRelDOMapper;
+import com.fankinsbook.auth.model.vo.user.UpdatePasswordReqVO;
 import com.fankinsbook.auth.model.vo.user.UserLoginReqVO;
 import com.fankinsbook.auth.service.UserService;
-import com.fankinsbook.framework.common.constant.enums.DeletedEnum;
-import com.fankinsbook.framework.common.constant.enums.StatusEnum;
+import com.fankinsbook.auth.shared.constant.RedisKeyConstants;
+import com.fankinsbook.auth.shared.constant.RoleConstants;
+import com.fankinsbook.auth.shared.enums.LoginTypeEnum;
+import com.fankinsbook.auth.shared.enums.ResponseCodeEnum;
 import com.fankinsbook.framework.common.exception.BizException;
 import com.fankinsbook.framework.common.response.Response;
-import com.fankinsbook.framework.common.util.JsonUtils;
+import com.fankinsbook.framework.common.shared.enums.DeletedEnum;
+import com.fankinsbook.framework.common.shared.enums.StatusEnum;
+import com.fankinsbook.framework.common.shared.util.JsonUtils;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +48,14 @@ public class UserServiceImpl implements UserService {
     private UserRoleRelDOMapper userRoleRelDOMapper;
 
     @Resource
+    private RoleDOMapper roleDOMapper;
+
+    @Resource
     private TransactionTemplate transactionTemplate;
+
+    @Resource
+    private PasswordEncoder passwordEncoder;
+
 
     /**
      * 登录与注册
@@ -110,6 +122,16 @@ public class UserServiceImpl implements UserService {
         return Response.success(tokenInfo.tokenValue);
     }
 
+    @Override
+    public Response<?> logout() {
+        // 获取当前登录用户 ID
+        Long userId = LoginUserContextHolder.getUserId();
+        // 退出登录 (指定用户 ID)
+        StpUtil.logout(userId);
+        return Response.success();
+    }
+
+
     /**
      * 系统自动注册用户
      * @param phone
@@ -124,7 +146,7 @@ public class UserServiceImpl implements UserService {
                 UserDO userDO = UserDO.builder()
                         .phone(phone)
                         .fankinsId(String.valueOf(fankinsId)) // 自动生成小红书号 ID
-                        .nickname("小红薯" + fankinsId) // 自动生成昵称, 如：小红薯10000
+                        .nickname("小番薯" + fankinsId) // 自动生成昵称, 如：小红薯10000
                         .status(StatusEnum.ENABLE.getValue()) // 状态为启用
                         .createTime(LocalDateTime.now())
                         .updateTime(LocalDateTime.now())
@@ -147,10 +169,13 @@ public class UserServiceImpl implements UserService {
                         .build();
                 userRoleRelDOMapper.insert(userRoleRelDO);
 
-                // 将该用户的角色 ID 存入 Redis 中
-                List<Long> roles = Lists.newArrayList();
-                roles.add(RoleConstants.COMMON_USER_ROLE_ID);
-                String userRolesKey = RedisKeyConstants.buildUserRoleKey(phone);
+                RoleDO roleDO = roleDOMapper.selectByPrimaryKey(RoleConstants.COMMON_USER_ROLE_ID);
+
+                // 将该用户的角色 ID 存入 Redis 中，指定初始容量为 1，这样可以减少在扩容时的性能开销
+                List<String> roles = new ArrayList<>(1);
+                roles.add(roleDO.getRoleKey());
+
+                String userRolesKey = RedisKeyConstants.buildUserRoleKey(userId);
                 redisTemplate.opsForValue().set(userRolesKey, JsonUtils.toJsonString(roles));
 
                 return userId;
@@ -161,4 +186,26 @@ public class UserServiceImpl implements UserService {
             }
         });
     }
+
+    @Override
+    public Response<?> updatePassword(UpdatePasswordReqVO updatePasswordReqVO) {
+        // 新密码
+        String newPassword = updatePasswordReqVO.getNewPassword();
+        // 密码加密
+        String encodePassword = passwordEncoder.encode(newPassword);
+
+        // 获取当前请求对应的用户 ID
+        Long userId = LoginUserContextHolder.getUserId();
+
+        UserDO userDO = UserDO.builder()
+                .id(userId)
+                .password(encodePassword)
+                .updateTime(LocalDateTime.now())
+                .build();
+        // 更新密码
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+
+        return Response.success();
+    }
+
 }

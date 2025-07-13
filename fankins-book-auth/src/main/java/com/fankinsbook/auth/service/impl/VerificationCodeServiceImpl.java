@@ -1,11 +1,11 @@
 package com.fankinsbook.auth.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
-import com.fankinsbook.auth.constant.RedisKeyConstants;
-import com.fankinsbook.auth.constant.enums.ResponseCodeEnum;
+import com.fankinsbook.auth.infrastructure.sms.AliyunSmsHelper;
 import com.fankinsbook.auth.model.vo.verificationCode.SendVerificationCodeReqVO;
 import com.fankinsbook.auth.service.VerificationCodeService;
-import com.fankinsbook.auth.sms.AliyunSmsHelper;
+import com.fankinsbook.auth.shared.constant.RedisKeyConstants;
+import com.fankinsbook.auth.shared.enums.ResponseCodeEnum;
 import com.fankinsbook.framework.common.exception.BizException;
 import com.fankinsbook.framework.common.response.Response;
 import jakarta.annotation.Resource;

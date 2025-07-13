@@ -1,6 +1,6 @@
 package com.fankinsbook.auth.model.vo.user;
 
-import com.fankinsbook.framework.common.validator.PhoneNumber;
+import com.fankinsbook.framework.common.shared.validator.PhoneNumber;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

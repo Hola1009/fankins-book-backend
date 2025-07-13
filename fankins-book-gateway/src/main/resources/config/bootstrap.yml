@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: fankins-book-gateway # 应用名称
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        enabled: true # 启用服务发现
+        group: DEFAULT_GROUP # 所属组
+        namespace: 21715aaa-d528-41e4-9d39-c65c9a380075 # 命名空间
+        server-addr: 127.0.0.1:8848 # Nacos 服务器地址
+server:
+  port: 8000 # 指定启动端口

@@ -1,7 +1,7 @@
 package com.fankins.book.framework.stater.jackson.config;
 
-import com.fankinsbook.framework.common.constant.DateConstants;
-import com.fankinsbook.framework.common.util.JsonUtils;
+import com.fankinsbook.framework.common.shared.constant.DateConstants;
+import com.fankinsbook.framework.common.shared.util.JsonUtils;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

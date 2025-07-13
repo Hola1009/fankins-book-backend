@@ -1,6 +1,5 @@
 package com.fankinsbook.auth.domain.mapper;
 
-import com.fankinsbook.auth.domain.dataobject.PermissionDO;
 import com.fankinsbook.auth.domain.dataobject.RolePermissionRelDO;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,6 +25,5 @@ public interface RolePermissionRelDOMapper {
      * @return
      */
     List<RolePermissionRelDO> selectByRoleIds(@Param("roleIds") List<Long> roleIds);
-
 
 }

@@ -1,6 +1,6 @@
 package com.fankinsbook.framework.biz.stater.operationlog.aspect;
 
-import com.fankinsbook.framework.common.util.JsonUtils;
+import com.fankinsbook.framework.common.shared.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

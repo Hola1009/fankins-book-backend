@@ -14,6 +14,7 @@
     <modules>
         <module>fankins-book-framework-common</module>
         <module>fankins-book-framework-stater-biz-operationlog</module>
+        <module>fankins-book-framework-stater-biz-context</module>
     </modules>
 
 
